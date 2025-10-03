@@ -38,7 +38,7 @@ prompt_template = FewShotPromptTemplate(
 prompt = prompt_template.invoke({"input": "What is Jack's favorite technology on DataCamp?"})
 print(prompt.text)
 
-llm = ChatOpenAI(model="gpt-4o-mini", api_key='<OPENAI_API_TOKEN>')
+llm = ChatOpenAI(model="gpt-4o-mini", api_key=os.getenv("OPENAI_API_KEY"))
 
 # Create and invoke the chain
 llm_chain = prompt_template | llm
