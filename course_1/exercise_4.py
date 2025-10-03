@@ -1,8 +1,9 @@
 
-from langchain_core.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate 
 from langchain_huggingface import HuggingFacePipeline
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 import os 
 from dotenv import load_dotenv
 load_dotenv()
@@ -23,3 +24,12 @@ time_prompt = PromptTemplate(
 
 # Invoke the learning_prompt with an activity
 print(learning_prompt.invoke({"activity": "play golf"}))
+
+
+seq_chain = ({"learning_plan": learning_prompt | llm | StrOutputParser()}
+    | time_prompt
+    | llm
+    | StrOutputParser())
+
+# Call the chain
+print(seq_chain.invoke({"activity": "play the harmonica"}))
