@@ -4,6 +4,7 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_chroma import Chroma
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
+from langchain_openai import ChatOpenAI
 import os 
 loader = PyPDFLoader('rag_vs_fine_tuning.pdf')
 data = loader.load()
@@ -52,6 +53,8 @@ retriever = vectorstore.as_retriever(
     search_type="similarity",
     search_kwargs={"k": 3}
 )
+
+llm = ChatOpenAI(model="gpt-4o-mini", api_key=os.getenv("OPENAI_API_KEY"))
 
 # Create a chain to link retriever, prompt_template, and llm
 rag_chain = ({"context": retriever, "question": RunnablePassthrough() }
