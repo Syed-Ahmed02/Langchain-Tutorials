@@ -1,7 +1,5 @@
 from langchain_community.retrievers import BM25Retriever
-from langchain_core.runnables import RunnablePassthrough()
-from langchain
-
+from langchain_core.runnables import RunnablePassthrough
 chunks = [
     "RAG stands for Retrieval Augmented Generation.",
     "Graph Retrieval Augmented Generation uses graphs to store and utilize relationships between documents in the retrieval process.",
